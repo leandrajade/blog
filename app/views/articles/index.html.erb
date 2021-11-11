@@ -1,0 +1,25 @@
+<table>
+    <thead>
+        <tr>
+            <th>count</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Body</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% counter = 1 %>
+        <% @articles.each do |article| %>
+            <tr>
+                <td><%= counter %></td>
+                <td><%= article.id %></td>
+                <td><%= article.name %></td>
+                <td><%= article.body %></td>
+            </tr>
+            <% counter += 1%>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to 'New Article', new_article_path %>
