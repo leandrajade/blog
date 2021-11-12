@@ -40,4 +40,10 @@ class ArticlesController < ApplicationController
         @article = Article.find(params[:id])
         @article.destroy
     end
+
+    private
+
+    def article_params
+        params.require(:article).permit(:name, :body)
+    end
 end
