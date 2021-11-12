@@ -19,12 +19,6 @@ class ArticlesController < ApplicationController
         else 
             render :new
         end
-
-        private
-
-        def article_params
-            params.require(:article).permit(:name, :body)
-        end
     end
     
     def edit
