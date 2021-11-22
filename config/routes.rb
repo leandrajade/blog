@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   delete '/articles/:id' => 'articles#delete', as: 'delete_article'
 
   get '/categories' => 'categories#index'
+  # get '/categories/:id/edit' => 'categories#edit'
+  # resources :categories
 end

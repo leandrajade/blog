@@ -3,13 +3,10 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
     
-    let!(:category) {Category.new}
+    let(:category) {Category.create(name: 'Sample name')}
   
     it '1. creates a category that can be used to organize my tasks' do
-        # Category.create(name: 'Sample name')
-        # category.name = 'Sample name'
-        category.save
-        expect(Category.count).to eq(1)
+        expect { category }.to change { Category.count }.by(1)
     end 
 
     context 'Validations' do
