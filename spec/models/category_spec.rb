@@ -4,10 +4,13 @@ require 'rails_helper'
 RSpec.describe Category, type: :model do
     
     let(:category) {Category.create(name: 'Sample name')}
-  
-    it '1. creates a category that can be used to organize my tasks' do
-        expect { category }.to change { Category.count }.by(1)
-    end 
+
+    # 1. creates a category that can be used to organize my tasks
+    describe 'creates a new category' do
+        it '1. creates a category that can be used to organize my tasks' do
+            expect { category }.to change { Category.count }.by(1)
+        end
+    end
 
     context 'Validations' do
         it 'Is not valid without a name' do

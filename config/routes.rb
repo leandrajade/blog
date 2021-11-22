@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   delete '/articles/:id' => 'articles#delete', as: 'delete_article'
 
   get '/categories' => 'categories#index'
+  post '/categories' => 'category#create', as: 'create_category'
   # get '/categories/:id/edit' => 'categories#edit'
   # resources :categories
 end
