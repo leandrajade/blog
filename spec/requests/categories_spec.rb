@@ -11,7 +11,7 @@ RSpec.describe 'Categories', type: :request do
         end
     end
 
-    #1. creates a category that can be used to organize my tasks
+    
     describe "GET #new" do
         it "returns the new page" do
             get new_category_path
@@ -20,10 +20,9 @@ RSpec.describe 'Categories', type: :request do
     end
 
     describe "POST #create" do
-        it "returns the create page" do
-            post categories_path
-            expect(response).to have_http_status(:success)
-            #expect(response).to render_template(:create) 
+        it "1. creates a category that can be used to organize my tasks" do
+            post categories_path, params: { name: 'any' }
+            expect(response).to have_http_status(302)
         end
     end
 
