@@ -12,11 +12,11 @@ class CategoriesController < ApplicationController
     end
     
     def create
-        @category = Category.new(category_params)
+        @category = Category.create(category_params)
 
         if @category.save 
             redirect_to categories_path
-        else 
+        else
             render :new
         end
     end
@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
 
     private
 
-    def article_params
+    def category_params
         params.permit(:name)
     end
 end
