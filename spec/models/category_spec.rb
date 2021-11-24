@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
     
-    let(:category) {Category.create(name: 'Sample name')}
+    let(:category) {Category.create(name: 'Sample name category')}
 
     describe 'creates a new category' do
         it '1. creates a category that can be used to organize my tasks' do
