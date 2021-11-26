@@ -31,7 +31,7 @@ RSpec.describe Article, type: :model do
             expect(Article.count).to eq(1)
         end 
 
-        it '3. Is not valid with name length less than 3' do
+        it '4. Is not valid with name length less than 3' do
             article.name = 'ab'
 
             expect(article).to_not be_valid

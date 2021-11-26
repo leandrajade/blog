@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Categories', type: :request do
 
+    # let(:category) {Category.new(name: 'Sample name category')}
+    
     describe "GET #index" do
         it "returns the index page" do
             get categories_path
@@ -9,7 +11,6 @@ RSpec.describe 'Categories', type: :request do
         end
     end
 
-    
     describe "GET #new" do
         it "returns the new page" do
             get new_category_path
@@ -19,7 +20,7 @@ RSpec.describe 'Categories', type: :request do
 
     describe "POST #create" do
         it "1. creates a category that can be used to organize my tasks" do
-            post categories_path, params: { name: 'abcde' }
+            post categories_path, params: { category: {name: "abcdefgh" } }
             expect(response).to have_http_status(302)
         end
     end

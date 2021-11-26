@@ -8,10 +8,15 @@ Rails.application.routes.draw do
   post '/articles/:id' => 'articles#update', as: 'update_article'
   delete '/articles/:id' => 'articles#delete', as: 'delete_article'
 
-  # get '/categories' => 'categories#index'
-  # post '/categories' => 'categories#create', as: 'create_category'
-  # get '/categories/:id/edit' => 'categories#edit'
+  resources :articles
+
+  # get '/categories' => 'categories#index' 
   # get '/categories/new' => 'categories#new', as: 'new_category'
+  # post '/categories' => 'categories#create', as: 'create_category'
+  # get '/categories:id' => 'categories#show', as: 'show_category'
+  # get '/categories/:id/edit' => 'categories#edit', as: 'edit_category'
+  # post '/categories/:id' => 'categories#update', as: 'update_category'
+  # delete '/categories/:id' => 'categories#delete', as: 'delete_category'
 
   resources :categories
 end
