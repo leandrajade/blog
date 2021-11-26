@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/articles/:id' => 'articles#update', as: 'update_article'
   delete '/articles/:id' => 'articles#delete', as: 'delete_article'
 
-  resources :articles
+  # resources :articles
 
   # get '/categories' => 'categories#index' 
   # get '/categories/new' => 'categories#new', as: 'new_category'
