@@ -7,16 +7,6 @@ Rails.application.routes.draw do
   get '/articles/:id/edit' => 'articles#edit', as: 'edit_article'
   post '/articles/:id' => 'articles#update', as: 'update_article'
   delete '/articles/:id' => 'articles#delete', as: 'delete_article'
-
-  # resources :articles
-
-  # get '/categories' => 'categories#index' 
-  # get '/categories/new' => 'categories#new', as: 'new_category'
-  # post '/categories' => 'categories#create', as: 'create_category'
-  # get '/categories:id' => 'categories#show', as: 'show_category'
-  # get '/categories/:id/edit' => 'categories#edit', as: 'edit_category'
-  # post '/categories/:id' => 'categories#update', as: 'update_category'
-  # delete '/categories/:id' => 'categories#delete', as: 'delete_category'
-
+  
   resources :categories
 end
