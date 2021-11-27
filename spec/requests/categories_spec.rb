@@ -33,9 +33,14 @@ RSpec.describe 'Categories', type: :request do
     end
 
     describe "POST #create" do
-        it "1. creates a category that can be used to organize my tasks" do
+        it "ensures to redirect" do
             post categories_path, params: { category: {name: "abcdefgh" } }
             expect(response).to have_http_status(302)
         end
+
+        it  'determines the Category count to increase by 1' do
+            expect { category }.to change { Category.count }.by(1)
+        end
+    
     end
 end
