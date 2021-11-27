@@ -38,9 +38,8 @@ RSpec.describe 'Categories', type: :request do
             expect(response).to have_http_status(302)
         end
 
-        it  'determines the Category count to increase by 1' do
+        it "determines the Category count to increase by 1" do
             expect { category }.to change { Category.count }.by(1)
         end
-    
     end
 end
