@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Category', type: :model do
     
     let(:category) {Category.create(name: 'Sample name category')}
-    # subject(:category) { create(:category) }
 
     context 'Validations' do
         it 'Is not valid without a name' do
@@ -24,8 +23,10 @@ RSpec.describe 'Category', type: :model do
 
         it "Is not valid when name is not unique" do
             category_duplicate = Category.create(name: 'Sample name category')
-            
+
             expect(category).to_not be_valid
+            expect(category.errors).to be_present
+            expect(category.errors.to_hash.keys).to include(:name)
         end
     end
 end
