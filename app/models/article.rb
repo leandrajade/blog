@@ -5,4 +5,6 @@ class Article < ApplicationRecord
     
     validates :body, presence: true
     validates :body, length: { minimum: 5 }
+
+    has_many :comments
 end

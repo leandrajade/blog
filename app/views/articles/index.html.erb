@@ -17,8 +17,12 @@
                 <td><%= article.name %></td>
                 <td><%= article.body %></td>
                 <td><%= link_to 'edit article', edit_article_path(article) %></td>
-                <td><%= link_to 'show article', show_article_path(article) %></td>
-                <td><%= link_to 'delete article', delete_article_path(article), method: :delete, data: { confirm: "Are you sure?"} %></td>
+                <td><%= link_to 'show article', article %></td>
+                <td><%= link_to 'delete article', article, method: :destroy, data: { confirm: "Are you sure?"} %></td>
+                
+                <%# <td><%= link_to 'edit article', edit_article_path(article) %></td> %>
+                <%# <td><%= link_to 'show article', show_article_path(article) %></td> %>
+                <%# <td><%= link_to 'delete article', delete_article_path(article), method: :delete, data: { confirm: "Are you sure?"} %></td> %>
             </tr>
             <% counter += 1%>
         <% end %>
