@@ -241,7 +241,6 @@ DEPENDENCIES
   selenium-webdriver
   spring
   turbolinks (~> 5)
-  tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
@@ -250,4 +249,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
