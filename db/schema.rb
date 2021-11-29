@@ -46,8 +46,11 @@ ActiveRecord::Schema.define(version: 2021_11_29_151150) do
     t.text "name"
     t.text "details"
     t.datetime "scheduled_at"
+    t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_tasks_on_category_id"
   end
 
+  add_foreign_key "tasks", "categories"
 end
