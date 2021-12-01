@@ -13,21 +13,36 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/tasks", type: :request do
-  
+
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      :category_id => Category.create(name:"unique name").id,
+      :name => 'test task name',
+      :details => 'test task details',
+      :scheduled_at => Time.new.strftime("%Y-%m-%d %H:%I:S")
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      :category => nil,
+      :name => nil,
+      :details => nil,
+      :scheduled_at => nil,
+      :category_id => Category.create(name:"unique name").id,
+
+    }
   }
 
   describe "GET /index" do
     it "renders a successful response" do
       Task.create! valid_attributes
-      get tasks_url
+      category = Category.create!(name:"uniq name") 
+      get category_path(category) 
+   
       expect(response).to be_successful
     end
   end
@@ -35,14 +50,17 @@ RSpec.describe "/tasks", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       task = Task.create! valid_attributes
-      get task_url(task)
+      category = Category.create!(name:"uniq name 3") 
+      get category_task_path(category, task)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_task_url
+      category = Category.create!(name:"uniq name 2") 
+      get category_path(category)
+
       expect(response).to be_successful
     end
   end
@@ -50,7 +68,9 @@ RSpec.describe "/tasks", type: :request do
   describe "GET /edit" do
     it "render a successful response" do
       task = Task.create! valid_attributes
-      get edit_task_url(task)
+      category = Category.create!(name:"uniq name") 
+
+      get edit_category_task_path(category, task)
       expect(response).to be_successful
     end
   end
@@ -58,27 +78,38 @@ RSpec.describe "/tasks", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Task" do
+        task = Task.create! valid_attributes
+        category = Category.create!(name:"uniq name") 
         expect {
-          post tasks_url, params: { task: valid_attributes }
+          post category_tasks_path(category), params: { task: valid_attributes }
         }.to change(Task, :count).by(1)
       end
 
       it "redirects to the created task" do
-        post tasks_url, params: { task: valid_attributes }
-        expect(response).to redirect_to(task_url(Task.last))
+        task = Task.create! valid_attributes
+        category = Category.create!(name:"uniq name") 
+        
+        post category_tasks_path(category), params: { task: valid_attributes }
+        expect(response).to redirect_to(category_task_path(category, Task.last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Task" do
+        # task = Task.create! invalid_attributes
+        category = Category.create!(name:"uniq name") 
+        
         expect {
-          post tasks_url, params: { task: invalid_attributes }
+          post category_tasks_path(category), params: { task: invalid_attributes }
         }.to change(Task, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post tasks_url, params: { task: invalid_attributes }
-        expect(response).to be_successful
+        task = Task.create invalid_attributes
+        category = Category.create!(name:"uniq name") 
+
+        post category_tasks_path(category, task)
+        expect(response).to have_http_status(422)
       end
     end
   end
@@ -86,14 +117,21 @@ RSpec.describe "/tasks", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+         :name => "new name",
+         :details => "new test task details",
+         :scheduled_at => Time.new.strftime("%Y-%m-%d %H:%I:S") 
+        }
       }
 
       it "updates the requested task" do
         task = Task.create! valid_attributes
         patch task_url(task), params: { task: new_attributes }
         task.reload
-        skip("Add assertions for updated state")
+
+        expect(task.name).to eq("new name")
+        expect(task.details).to eq("new test task details")
+        expect(task.scheduled_at).to eq(Time.new.strftime("%Y-%m-%d %H:%I:S"))
       end
 
       it "redirects to the task" do
@@ -108,7 +146,9 @@ RSpec.describe "/tasks", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         task = Task.create! valid_attributes
         patch task_url(task), params: { task: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(422)
+
+        # expect(response).to be_successful
       end
     end
   end
@@ -116,15 +156,19 @@ RSpec.describe "/tasks", type: :request do
   describe "DELETE /destroy" do
     it "destroys the requested task" do
       task = Task.create! valid_attributes
+      category = Category.create!(name:"uniq name") 
+
       expect {
-        delete task_url(task)
+        delete category_task_path(category, task)
       }.to change(Task, :count).by(-1)
     end
 
     it "redirects to the tasks list" do
       task = Task.create! valid_attributes
-      delete task_url(task)
-      expect(response).to redirect_to(tasks_url)
+      category = Category.create!(name:"uniq name") 
+
+      delete category_task_path(category, task)
+      expect(response).to redirect_to(category_path(category))
     end
   end
 end

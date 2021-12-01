@@ -5,6 +5,7 @@ class CreateTasks < ActiveRecord::Migration[6.1]
       t.text :details
       t.datetime :scheduled_at
       t.belongs_to :category, foreign_key: true
+      
       t.timestamps
     end
   end

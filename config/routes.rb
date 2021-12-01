@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :tasks
+  # resources :tasks
+  resources :categories
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # get '/articles' => 'articles#index' 
   # get '/articles/new' => 'articles#new', as: 'new_article'
@@ -13,5 +14,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   
-  resources :categories
+  resources :categories do
+    resources :tasks
+  end
 end
