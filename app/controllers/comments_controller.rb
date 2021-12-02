@@ -14,7 +14,6 @@ class CommentsController < ApplicationController
         @comment = @article.comments.build(comment_params)
 
         if @comment.save
-            # redirect_to article_comments_path
             redirect_to article_comment_path(@article.id, @comment.id)
         else
             render :new

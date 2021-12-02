@@ -4,7 +4,6 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    # @tasks = Task.all
     @tasks = @category.tasks
   end
 
@@ -15,9 +14,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    # @task = Task.new
     @task = @category.tasks.build
-
   end
 
   # GET /tasks/1/edit
@@ -25,12 +22,17 @@ class TasksController < ApplicationController
     @tasks = Task.find(params[:id])
   end
 
-  # POST /tasks or /tasks.json
   def create
-    @task = Task.create(task_params)
+    @task = @category.tasks.build(task_params)
 
-    if @task.save
-      redirect_to category_task_path(@category.id, @task.id)
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to category_path(@category.id), notice: "Task was successfully created." }
+        format.json { render :show, status: :ok, location: category_task_path(@category.id, @task.id)}
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
 
   end
@@ -39,7 +41,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was successfully updated." }
+        format.html { redirect_to category_task_path(@category.id, @task.id), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,12 +53,12 @@ class TasksController < ApplicationController
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task = Task.find(params[:id]).destroy
-    redirect_to category_path(@category.id)
-    # @task.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
-    #   format.json { head :no_content }
-    # end
+    # redirect_to category_path(@category.id)
+
+    respond_to do |format|
+      format.html { redirect_to category_path(@category.id), notice: "Task was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -71,6 +73,9 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.fetch(:task, {}).permit(:name, :details, :scheduled_at, :category_id)
+      # params.fetch(:task, {}).permit(:name, :details, :scheduled_at, :category_id)
+      params.require(:task).permit(:name, :details, :scheduled_at, :category_id)
+
     end
 end
+
