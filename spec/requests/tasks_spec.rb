@@ -88,11 +88,11 @@ RSpec.describe "/tasks", type: :request do
         }.to change(Task, :count).by(1)
       end
 
-      it "redirects to the created task" do
+      it "redirects to the category's task" do
         task = Task.create! valid_attributes
         
         post category_tasks_path(@category), params: { task: valid_attributes }
-        expect(response).to redirect_to(category_task_path(@category, task))
+        expect(response).to redirect_to(category_path(@category))
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe "/tasks", type: :request do
       it "renders a successful response (i.e. to display the 'new' template)" do
         task = Task.create invalid_attributes
 
-        post category_tasks_path(@category, task)
+        post category_tasks_path(@category), params: { task: invalid_attributes }
         expect(response).to have_http_status(422)
       end
     end
@@ -145,7 +145,7 @@ RSpec.describe "/tasks", type: :request do
         patch category_task_path(@category, task), params: { task: new_attributes }
         task.reload
 
-        expect(response).to redirect_to(category_task_path(@category, task))
+        expect(response).to redirect_to(category_path(@category))
       end
     end
 
