@@ -4,9 +4,9 @@ RSpec.describe 'Categories', type: :request do
 
     let(:category) {Category.create(name: 'Sample name category')}
     
-    before do
-        sign_in create(:user)
-    end
+    # before do
+    #     sign_in create(:user)
+    # end
 
     describe "GET #index" do
         it "returns the index page" do

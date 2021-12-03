@@ -1,5 +1,8 @@
 
 <table>
+    <thead>
+        <h1>Category<h1>
+    </thead>
     <tbody>
         <tr>
             <td><%= @category.name %></td>
@@ -8,3 +11,5 @@
 </table>
 
 <%= render 'tasks/index' %>
+
+<%= link_to 'Back to Category list', categories_path %>

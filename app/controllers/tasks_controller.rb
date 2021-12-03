@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to category_task_path(@category.id, @task.id), notice: "Task was successfully updated." }
+        format.html { redirect_to category_path(@category.id), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,6 @@ class TasksController < ApplicationController
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task = Task.find(params[:id]).destroy
-    # redirect_to category_path(@category.id)
 
     respond_to do |format|
       format.html { redirect_to category_path(@category.id), notice: "Task was successfully destroyed." }
@@ -66,6 +65,7 @@ class TasksController < ApplicationController
     def get_category
       @category = Category.find(params[:category_id])
     end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
@@ -73,9 +73,7 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      # params.fetch(:task, {}).permit(:name, :details, :scheduled_at, :category_id)
       params.require(:task).permit(:name, :details, :scheduled_at, :category_id)
-
     end
 end
 
