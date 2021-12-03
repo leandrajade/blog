@@ -1,0 +1,16 @@
+<table>
+    <thead>
+        <tr>
+            <th><h1>Category</h1></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @tasks.each do |task_today| %>
+            <tr>
+                <% puts task_today %>
+                <td><%= task_today.name %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

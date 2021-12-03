@@ -17,6 +17,9 @@ RSpec.describe "/tasks", type: :request do
   # Task. As you add validations to Task, be sure to
   # adjust the attributes here as well.
 
+  before do
+    sign_in create(:user)
+  end
 
   let(:valid_attributes) {
     {
@@ -89,7 +92,7 @@ RSpec.describe "/tasks", type: :request do
         task = Task.create! valid_attributes
         
         post category_tasks_path(@category), params: { task: valid_attributes }
-        expect(response).to redirect_to(category_task_path(@category, Task.last))
+        expect(response).to redirect_to(category_task_path(@category, task))
       end
     end
 
@@ -111,8 +114,6 @@ RSpec.describe "/tasks", type: :request do
   end
 
   describe "PATCH /update" do
-    
-
     context "with valid parameters" do
       
       let(:new_attributes) {

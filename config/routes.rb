@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # resources :tasks
-  resources :categories
+
+  devise_for :users
+  resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # get '/articles' => 'articles#index' 
   # get '/articles/new' => 'articles#new', as: 'new_article'
@@ -9,7 +10,8 @@ Rails.application.routes.draw do
   # get '/articles/:id/edit' => 'articles#edit', as: 'edit_article'
   # post '/articles/:id' => 'articles#update', as: 'update_article'
   # delete '/articles/:id' => 'articles#delete', as: 'delete_article'
-
+  get '/today' => 'tasks#today'
+  
   resources :articles do
     resources :comments
   end

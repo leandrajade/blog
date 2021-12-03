@@ -1,9 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<h1> Task for <%= @category.name%></h1>
 <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Schedule</th>
+        </tr>
+    </thead>
     <tbody>
         <tr>
             <td><%= @task.name %></td>
+            <td><%= @task.details %></td>
+            <td><%= @task.scheduled_at %></td>
         </tr>
     </tbody>
 </table>

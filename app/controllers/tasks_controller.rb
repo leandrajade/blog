@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
+  
   before_action :set_task, only: %i[ show edit update destroy ]
-  before_action :get_category
+  before_action :get_category, except: [:today]
 
   # GET /tasks or /tasks.json
   def index
@@ -58,6 +60,10 @@ class TasksController < ApplicationController
       format.html { redirect_to category_path(@category.id), notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def today
+    @tasks = Task.where("DATE(scheduled_at) = ?", Date.today)
   end
 
   private
