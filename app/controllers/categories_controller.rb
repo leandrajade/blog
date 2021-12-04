@@ -17,10 +17,14 @@ class CategoriesController < ApplicationController
     def create
         @category = Category.new(category_params)
 
-        if @category.save 
-            redirect_to categories_path
-        else
-            render :new
+        respond_to do |format|
+            if @category.save
+              format.html { redirect_to categories_path, notice: "Task was successfully created." }
+              format.json { render :show, status: :ok, location: categories_path}
+            else
+              format.html { render :new, status: :unprocessable_entity }
+              format.json { render json: @category.errors, status: :unprocessable_entity }
+            end
         end
     end
     

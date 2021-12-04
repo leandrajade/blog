@@ -48,7 +48,7 @@ RSpec.describe "/tasks", type: :request do
   # describe "GET /index" do
   #   it "renders a successful response" do
   #     Task.create! valid_attributes
-  #     get category_path(category) 
+  #     get category_tasks_path
    
   #     expect(response).to be_successful
   #   end
